@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66df2041-b8f4-4d40-84c1-498001586b3e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/tango/populate.py" beforeDir="false" afterPath="$PROJECT_DIR$/tango/populate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tango/rango/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/tango/rango/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tango/rango/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tango/rango/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tango/rango/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tango/rango/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -60,8 +58,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tango/rango/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="15" column="45" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
+            <state relative-caret-position="170">
+              <caret line="10" column="4" lean-forward="true" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -130,12 +128,12 @@
         <option value="$PROJECT_DIR$/tango/rango/templates/rango/index.html" />
         <option value="$PROJECT_DIR$/tango/tango/settings.py" />
         <option value="$PROJECT_DIR$/tango/tango/urls.py" />
-        <option value="$PROJECT_DIR$/tango/rango/views.py" />
         <option value="$PROJECT_DIR$/tango/rango/templates/rango/about.html" />
         <option value="$PROJECT_DIR$/tango/rango/urls.py" />
         <option value="$PROJECT_DIR$/tango/rango/models.py" />
         <option value="$PROJECT_DIR$/tango/populate.py" />
         <option value="$PROJECT_DIR$/tango/rango/admin.py" />
+        <option value="$PROJECT_DIR$/tango/rango/views.py" />
       </list>
     </option>
   </component>
@@ -531,8 +529,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tango/rango/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="15" column="45" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
+        <state relative-caret-position="170">
+          <caret line="10" column="4" lean-forward="true" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
