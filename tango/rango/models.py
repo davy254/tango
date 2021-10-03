@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=128, unique=True)
+    name = models.CharField(max_length=128, unique=True, null=True)
 
     class Meta:
         verbose_name_plural = 'Categories'
@@ -12,7 +12,7 @@ class Category(models.Model):
 
 
 class Page(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=128)
     url = models.URLField()
     views = models.IntegerField(default=0)
