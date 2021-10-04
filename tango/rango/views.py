@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from  .models import Category, Page
+from django.views.generic.list import ListView
 
 
 def index(request):
@@ -16,6 +17,11 @@ def index(request):
     return render( request,'rango/index.html', context)
 
 
+# class CategoryListView(ListView):
+#     model = Category
+#     template_name = 'rango/index.html'
+#     ordering = ['-likes']
+
 def about(request):
     # A dictionary to pass to the template engine
     context = {'boldmessage': 'I am a bold font of the context on the About Page '}
@@ -23,3 +29,23 @@ def about(request):
     return render(request, 'rango/about.html', context)
 
 
+def category(request, category_name_url):
+    category_name = category_name_url.replace('_', ' ')
+    print(category_name_url)
+    print(category_name)
+
+    context = {'category_name': category_name}
+
+    try:
+        category = Category.objects.get(name=category_name)
+
+
+        pages = Page.objects.filter(category=category)
+
+        context['pages'] = pages
+        context['category'] = category
+
+    except Category.DoesNotExist:
+        pass
+
+    return render(request, 'rango/category.html', context)
