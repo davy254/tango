@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from  .models import Category, Page
+from .forms import CategoryForm
 from django.views.generic.list import ListView
 
 
@@ -16,6 +17,9 @@ def index(request):
                'categories_views':category_list_views}
 
     for category in category_list_likes:
+        category.url = category.name.replace(' ', '_')
+
+    for category in category_list_views:
         category.url = category.name.replace(' ', '_')
 
     # Rendering a response to the client
@@ -59,3 +63,23 @@ def category(request, category_name_url):
         pass
 
     return render(request, 'rango/category.html', context)
+
+
+def add_category(request):
+
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+            return index(request)
+
+        else:
+            print(form.errors)
+
+    else:
+        form = CategoryForm()
+
+    return render(request, 'rango/add_category.html', {'form':form})
+
