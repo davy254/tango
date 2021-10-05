@@ -8,10 +8,15 @@ def index(request):
     # Querying the database for for a list of all categories
     # Ordering the category list in descending order
     # Retrieving only to 5 categories
-    category_list = Category.objects.order_by('-likes')[:5]
+    category_list_likes = Category.objects.order_by('-likes')[:5]
+    category_list_views = Category.objects.order_by('-views')[:5]
 
     # A dictionary to pass to the template engine
-    context = {'categories': category_list}
+    context = {'categories_likes': category_list_likes,
+               'categories_views':category_list_views}
+
+    for category in category_list_likes:
+        category.url = category.name.replace(' ', '_')
 
     # Rendering a response to the client
     return render( request,'rango/index.html', context)
@@ -20,7 +25,12 @@ def index(request):
 # class CategoryListView(ListView):
 #     model = Category
 #     template_name = 'rango/index.html'
-#     ordering = ['-likes']
+#     context_object_name = ('categories_likes', 'categories_views')
+#
+#     def get_queryset(self):
+#         categories_likes = Category.objects.order_by('-likes')[:5]
+#         categories_views = Category.objects.order_by('-views')[:5]
+#         return categories_likes , categories_views
 
 def about(request):
     # A dictionary to pass to the template engine
