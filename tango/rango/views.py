@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from  .models import Category, Page
-from .forms import CategoryForm
+from .forms import CategoryForm, PageForm
 from django.views.generic.list import ListView
 
 
@@ -43,12 +43,17 @@ def about(request):
     return render(request, 'rango/about.html', context)
 
 
-def category(request, category_name_url):
+def decode_url(category_name_url):
     category_name = category_name_url.replace('_', ' ')
+    return category_name
+
+
+def category(request, category_name_url):
+    category_name = decode_url(category_name_url)
     print(category_name_url)
     print(category_name)
 
-    context = {'category_name': category_name}
+    context = {'category_name': category_name, 'category_name_url':category_name_url}
 
     try:
         category = Category.objects.get(name=category_name)
@@ -82,4 +87,35 @@ def add_category(request):
         form = CategoryForm()
 
     return render(request, 'rango/add_category.html', {'form':form})
+
+
+def add_pages(request, category_name_url):
+    category_name = decode_url(category_name_url)
+
+    if request.method == 'POST':
+        form = PageForm(request.POST)
+
+        if form.is_valid():
+            page = form.save(commit=False)
+
+            try:
+                cat = Category.objects.get(name=category_name)
+
+                page.category = cat
+            except Category.DoesNotExist:
+                return render(request, 'rango/add_category.html', {'form':form})
+
+            page.views = 0
+
+            page.save()
+
+            return category(request, category_name_url)
+        else:
+            print(form.errors)
+    else:
+        form = PageForm()
+
+
+    context = {'category_name_url':category_name_url, 'category_name':category_name, 'form':form}
+    return render(request, 'rango/add_page.html', context)
 

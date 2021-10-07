@@ -12,6 +12,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
 
 class Page(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
@@ -21,4 +24,7 @@ class Page(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
