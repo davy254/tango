@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from  .models import Category, Page
+from django.contrib import  messages
 from .forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from django.views.generic.list import ListView
 
@@ -142,7 +143,10 @@ def register(request):
             profile.save()
 
             registered = True
-            return redirect('index')
+
+            username = user_form.cleaned_data.get('username')
+            messages.success(request, f'Account for { username} has been created.Try to login now')
+            return redirect('login')
 
         else:
             print(user_form.errors, profile_form.errors)

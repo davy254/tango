@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rango</title>
+</head>
+<body>
+
+
+    Rango says: <strong>Login here....</strong>
+    {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+    {% endif %}
+    <div class="entry entry-single container mt-3 mb-2" style="width:50%;background:#FFFFFF;">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Log In</legend>
+                    {{ form }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-info "  style="background:#0078FF;" type="submit">Log In</button>
+                    <small class="text-muted ml-2">
+                        <a href="">Forgot Password</a>
+                    </small>
+                </div>
+            </form>
+            <div class="border-top pt-3">
+                <small class="text-muted">
+                    Do you have need an account?<a class="ml-2" href="">Sign Up and become a Fan.</a>
+                </small>
+            </div>
+        </div>
+
+
+</body>
+</html>
