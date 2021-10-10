@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from  .models import Category, Page
 from django.contrib import  messages
 from .forms import CategoryForm, PageForm, UserForm, UserProfileForm
+from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
 
 
@@ -49,6 +50,7 @@ def decode_url(category_name_url):
     return category_name
 
 
+
 def category(request, category_name_url):
     category_name = decode_url(category_name_url)
     print(category_name_url)
@@ -71,6 +73,7 @@ def category(request, category_name_url):
     return render(request, 'rango/category.html', context)
 
 
+@login_required()
 def add_category(request):
 
     if request.method == 'POST':
@@ -90,7 +93,7 @@ def add_category(request):
     return render(request, 'rango/add_category.html', {'form':form})
 
 
-
+@login_required()
 def add_pages(request, category_name_url):
     category_name = decode_url(category_name_url)
 

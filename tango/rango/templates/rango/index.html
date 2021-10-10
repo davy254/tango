@@ -1,11 +1,9 @@
-<!DOCTYPE html>
+{% extends 'rango/base.html'%}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Rango</title>
-</head>
-<body>
+
+{% block title %} {{ category_name }} {% endblock %}
+
+{% block content %}
     <h1>Rango says....Hello world!</h1>
     <p>Categories as per likes</p>
 
@@ -31,6 +29,7 @@
         </ul>
 
         <a href="/rango/add_category/">Add a New Category</a><br />
+        <a href="/logout/">Logout Here</a><br />
     {% else %}
         <strong><p>There are no categories(views) present.</p></strong>
     {% endif %}
@@ -56,7 +55,7 @@
             {% endfor %}
         </ul>
 
-
+    <a href="/rango/add_category/">Add a New Category</a><br />
     {% else %}
         <strong><p>There are no categories(views) present.</p></strong>
     {% endif %}
@@ -64,14 +63,10 @@
 
         <p>{{ user }} is not authenticated. Kindly register or login </p>
 
-        <a href="/login/">Login Here</a><br />
-        <a href="/rango/register/">Register Here</a><br />
-        <a href="/rango/about/">About Page</a>
+
     {% endif %}
 
 
 
 
-
-</body>
-</html>
+{% endblock %}

@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Rango</title>
-</head>
-<body>
+{% extends 'rango/base.html'%}
+{% load static %}
+{% block title %} {{ category_name }} {% endblock %}
 
+{% block content %}
 
     Rango says: <strong>Login here....</strong>
     {% if messages %}
@@ -36,6 +33,4 @@
             </div>
         </div>
 
-
-</body>
-</html>
+{% endblock %}
