@@ -4,10 +4,13 @@ from  .models import Category, Page
 from django.contrib import  messages
 from .forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from django.contrib.auth.decorators import login_required
+from  datetime import datetime
 from django.views.generic.list import ListView
 
 
 def index(request):
+
+    # request.session.set_test_cookie()
     # Querying the database for for a list of all categories
     # Ordering the category list in descending order
     # Retrieving only to 5 categories
@@ -24,9 +27,45 @@ def index(request):
     for category in category_list_views:
         category.url = category.name.replace(' ', '_')
 
-    # Rendering a response to the client
-    return render( request,'rango/index.html', context)
+    # response = render( request,'rango/index.html', context)
+    #
+    # visits = int(request.COOKIES.get('visits', '0'))
 
+    # if 'last_visit' in request.COOKIES:
+    #     last_visit = request.COOKIES['last_visit']
+    #
+    #     last_visit_time = datetime.strptime(last_visit[:-7], "%Y-%m-%d %H:%M:%S")
+    #
+    #     if (datetime.now() - last_visit_time).seconds > 5:
+    #         response.set_cookie('visits', visits+1)
+    #         response.set_cookie('last_visit', datetime.now())
+    # else:
+    #     response.set_cookie('last_visit', datetime.now())
+    #
+    #
+    # # Rendering a response to the client
+    # return response
+
+    if request.session.get('last_visit'):
+        last_visit_time = request.session.get('last_visit')
+        visits = request.session.get('visits', 0)
+        print(last_visit_time)
+        print(visits)
+
+        if (datetime.now() - datetime.strptime(last_visit_time[:-7], '%Y-%m-%d %H:%M:%S')).seconds >5:
+            request.session['visits'] = visits + 1
+            request.session['last_visit'] = str(datetime.now())
+    else:
+        request.session['last_visit'] = str(datetime.now())
+        request.session['visits'] = 1
+        print(request.session.get('last_visit'))
+        visits = request.session.get('visits')
+
+    context = {'categories_likes': category_list_likes,
+               'categories_views': category_list_views,
+               'visits':visits,}
+
+    return render( request,'rango/index.html', context)
 
 # class CategoryListView(ListView):
 #     model = Category
@@ -39,8 +78,19 @@ def index(request):
 #         return categories_likes , categories_views
 
 def about(request):
+    # if request.session.test_cookie_worked():
+    #     print('>>>>>>>>>>TEST COOKIE WORKED!!!')
+    #     request.session.delete_test_cookie()
+    # else:
+    #     print('>>>>>>NO COOKIES')
     # A dictionary to pass to the template engine
-    context = {'boldmessage': 'I am a bold font of the context on the About Page '}
+
+    if request.session.get('visits'):
+        count = request.session.get('visits')
+    else:
+        count = 0
+    context = {'boldmessage': 'I am a bold font of the context on the About Page ',
+               'count': count}
     # Rendering a response to the client
     return render(request, 'rango/about.html', context)
 

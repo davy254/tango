@@ -51,6 +51,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+#SESSION_ENGINE ='django.contrib.sessions.models.Session'
+
 ROOT_URLCONF = 'tango.urls'
 
 TEMPLATES = [
@@ -131,3 +133,5 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = '/login/'
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 1209600
